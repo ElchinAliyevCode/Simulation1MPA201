@@ -1,0 +1,60 @@
+﻿@using Simulation1MPA201.Models
+@model ProductCreateVM
+
+
+<div class="container">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+
+        <form method="post" enctype="multipart/form-data">
+
+
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input class="form-control" asp-for="Title" placeholder="Enter Title">
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <input class="form-control" asp-for="Description" placeholder="Enter Description">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Rating"></label>
+                <input class="form-control" asp-for="Rating" placeholder="Enter Rating">
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Price"></label>
+                <input class="form-control" asp-for="Price" placeholder="Enter Price">
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Image"></label>
+                <input class="form-control" asp-for="Image" placeholder="Enter Image">
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <select asp-for="CategoryId" class="form-control">
+                    @foreach (Category category in ViewBag.Categories)
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+
+</div>
+
