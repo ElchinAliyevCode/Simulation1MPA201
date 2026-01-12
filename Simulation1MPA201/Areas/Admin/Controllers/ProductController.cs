@@ -5,7 +5,8 @@ using Simulation1MPA201.Contexts;
 using Simulation1MPA201.ViewModels.Product;
 
 namespace Simulation1MPA201.Areas.Admin.Controllers;
-
+[Area("Admin")]
+//[Authorize(Roles ="Admin")]
 public class ProductController : Controller
 {
     private readonly SimulationDbContext _context;
@@ -17,14 +18,31 @@ public class ProductController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var products = await _context.Products.Select(x => new ProductGetVM()
+        var products = await _context.Products.Include(x => x.Category).Select(x => new ProductGetVM()
         {
-            Title=x.Title,
-            Description=x.Description,
-            Price=x.Price,
-            Rating=x.Rating,
-            CategoryName=x.Category.Name
+            Id = x.Id,
+            Title = x.Title,
+            Description = x.Description,
+            Price = x.Price,
+            Rating = x.Rating,
+            CategoryName = x.Category.Name
         }).ToListAsync();
+
+
+        return View(products);
+    }
+
+    public async Task<IActionResult> Create()
+    {
+        await SendCategoriesWithViewBag();
         return View();
     }
+
+
+    private async Task SendCategoriesWithViewBag()
+    {
+        var categories = await _context.Categories.ToListAsync();
+        ViewBag.Categories = categories;
+    }
+
 }
