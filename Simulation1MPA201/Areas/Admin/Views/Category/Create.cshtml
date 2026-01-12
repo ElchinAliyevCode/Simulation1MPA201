@@ -1,0 +1,15 @@
+﻿@model CategoryCreateVM
+<div class="container">
+    <div asp-validation-summary="ModelOnly" class="text-danger"><</div>
+	<div class="row">
+        <form method="post" asp-area="Admin" asp-controller="Category" asp-action="Create">
+            <div class="form-group">
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" placeholder="Enter name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+	</div>
+</div>
